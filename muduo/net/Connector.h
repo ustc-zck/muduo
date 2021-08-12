@@ -63,6 +63,7 @@ class Connector : noncopyable,
   InetAddress serverAddr_;
   bool connect_; // atomic
   States state_;  // FIXME: use atomic variable
+  //客户端socket()得到的文件句柄的封装
   std::unique_ptr<Channel> channel_;
   NewConnectionCallback newConnectionCallback_;
   int retryDelayMs_;

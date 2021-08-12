@@ -57,6 +57,7 @@ void Acceptor::handleRead()
   loop_->assertInLoopThread();
   InetAddress peerAddr;
   //FIXME loop until no more
+  //调用accept函数，在eventloop中加入连接建立回调函数
   int connfd = acceptSocket_.accept(&peerAddr);
   if (connfd >= 0)
   {
@@ -64,6 +65,7 @@ void Acceptor::handleRead()
     // LOG_TRACE << "Accepts of " << hostport;
     if (newConnectionCallback_)
     {
+      //连接回调函数
       newConnectionCallback_(connfd, peerAddr);
     }
     else

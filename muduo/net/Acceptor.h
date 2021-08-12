@@ -8,6 +8,7 @@
 //
 // This is an internal header file, you should not include this.
 
+//服务端对socketfd进行封装，连接回调函数
 #ifndef MUDUO_NET_ACCEPTOR_H
 #define MUDUO_NET_ACCEPTOR_H
 
@@ -50,7 +51,9 @@ class Acceptor : noncopyable
   void handleRead();
 
   EventLoop* loop_;
+  //socket fd by system call ::socket(), can call listen() and accept()
   Socket acceptSocket_;
+  //acceptChannel is a wrapper of above fd, so there may accept event happen on this fd
   Channel acceptChannel_;
   NewConnectionCallback newConnectionCallback_;
   bool listening_;

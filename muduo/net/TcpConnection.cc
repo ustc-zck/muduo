@@ -20,6 +20,7 @@
 using namespace muduo;
 using namespace muduo::net;
 
+//封装连接得到的fd
 void muduo::net::defaultConnectionCallback(const TcpConnectionPtr& conn)
 {
   LOG_TRACE << conn->localAddress().toIpPort() << " -> "
@@ -150,6 +151,7 @@ void TcpConnection::sendInLoop(const void* data, size_t len)
   // if no thing in output queue, try writing directly
   if (!channel_->isWriting() && outputBuffer_.readableBytes() == 0)
   {
+    //发送数据，然后在eventloop中进行回调用
     nwrote = sockets::write(channel_->fd(), data, len);
     if (nwrote >= 0)
     {
@@ -201,7 +203,7 @@ void TcpConnection::shutdown()
     loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
   }
 }
-
+b
 void TcpConnection::shutdownInLoop()
 {
   loop_->assertInLoopThread();

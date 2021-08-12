@@ -14,6 +14,7 @@
 #include "muduo/base/Mutex.h"
 #include "muduo/net/TcpConnection.h"
 
+//封装的客户端的socket()得到的句柄
 namespace muduo
 {
 namespace net

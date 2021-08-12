@@ -98,7 +98,7 @@ class TcpServer : noncopyable
   void removeConnectionInLoop(const TcpConnectionPtr& conn);
 
   typedef std::map<string, TcpConnectionPtr> ConnectionMap;
-
+  //accept loop 
   EventLoop* loop_;  // the acceptor loop
   const string ipPort_;
   const string name_;
